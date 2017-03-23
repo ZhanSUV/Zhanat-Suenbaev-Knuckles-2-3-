@@ -14,7 +14,7 @@ namespace Лаба_2_пятнашки__Reboot
         }
         public static void PlayGame3(Game3 player1)
         {
-            player1.field[1, 1] = 12;
+            //player1.field[1, 1] = 12;
             Console.Clear();
             //Printer.ClearingConsole();
             Console.WriteLine("You can random your arr. If you want to random arr, add 'random'");
@@ -45,8 +45,8 @@ namespace Лаба_2_пятнашки__Reboot
                 }
                 else
                 {
-                    Location n = new Location(value, player1.field);
-                    Location zero = new Location(0, player1.field);
+                    Location n = new Location(value, player1.Field);
+                    Location zero = new Location(0, player1.Field);
                     if (player1.Shift(value, n, zero))
                     {
                         player1.ChangeKnuckles(value, n, zero);
@@ -98,8 +98,8 @@ namespace Лаба_2_пятнашки__Reboot
                 }
                 else
                 {
-                    Location n = new Location(value, player1.field);
-                    Location zero = new Location(0, player1.field);
+                    Location n = new Location(value, player1.Field);
+                    Location zero = new Location(0, player1.Field);
                     if (player1.Shift(value, n, zero))
                     {
                         player1.ChangeKnuckles(value, n, zero);
@@ -139,8 +139,8 @@ namespace Лаба_2_пятнашки__Reboot
             }
             else
             {
-                Location n = new Location(value, player1.field);
-                Location zero = new Location(0, player1.field);
+                Location n = new Location(value, player1.Field);
+                Location zero = new Location(0, player1.Field);
                 if (player1.Shift(value, n, zero))
                 {
                     player1.ChangeKnuckles(value, n, zero);

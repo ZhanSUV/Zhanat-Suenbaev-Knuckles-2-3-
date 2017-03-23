@@ -10,10 +10,10 @@ namespace Лаба_2_пятнашки__Reboot
     {
         public static void Field(Game knuckles)
         {
-            for (int i = 0; i < knuckles.field.GetLength(0); i++)
+            for (int i = 0; i < knuckles.Field.GetLength(0); i++)
             {
                 Console.Write("\t");
-                for (int j = 0; j < knuckles.field.GetLength(1) ; j++)
+                for (int j = 0; j < knuckles.Field.GetLength(1) ; j++)
                 {
                     Console.Write(knuckles[i, j] + "  ");
                 }

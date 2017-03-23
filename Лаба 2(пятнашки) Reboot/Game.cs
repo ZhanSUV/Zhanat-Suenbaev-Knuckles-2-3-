@@ -8,7 +8,14 @@ namespace Лаба_2_пятнашки__Reboot
 {
     class Game
     {
-        public readonly int[,] field;
+        protected int[,] field;
+        public int[,] Field
+        {
+            get
+            {
+                return field;
+            }
+        }
         public Game(int[] numbers)
         {
             this.field = new int[(int)Math.Sqrt(numbers.Length), (int)Math.Sqrt(numbers.Length)];
