@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Лаба_2_пятнашки__Reboot
 {
-    // Пока сложно
     class Location
     {
         public int x;

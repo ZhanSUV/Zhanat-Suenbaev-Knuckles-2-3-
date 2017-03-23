@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 14 for Windows Desktop
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Лаба 2(пятнашки) Reboot", "Лаба 2(пятнашки) Reboot\Лаба 2(пятнашки) Reboot.csproj", "{A5F99630-5CB2-4EC4-B864-5A786B2FC7EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knuckles 2-3", "Лаба 2(пятнашки) Reboot\Knuckles 2-3.csproj", "{A5F99630-5CB2-4EC4-B864-5A786B2FC7EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

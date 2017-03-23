@@ -10,38 +10,119 @@ namespace Лаба_2_пятнашки__Reboot
     {
         static void Main(string[] args)
         {
-            ChooseInputParameter();
+            ChooseTypeGame();
         }
-        public static void PlayGame(Game3 player1)
+        public static void PlayGame3(Game3 player1)
         {
-            Print.ClearingConsole();
+            Printer.ClearingConsole();
+            Printer.InfoAboutRandom();
+            Printer.InfoAboutRollback();
             while (!player1.CheckWinSequence())
             {
-                Print.PrintField(player1.field);
-                Print.AskNumber();
-                int value = Convert.ToInt32(Console.ReadLine());
+                int value;
+                Printer.Field(player1.field);
+                Printer.AskNumber();
+                string answer = Console.ReadLine();
+                bool number = Int32.TryParse(answer, out value);
+                if (!number)
+                {
+                    if (answer == "r")
+                    {
+                        player1.Rollback();
+                    }
+                    else if (answer == "random")
+                    {
+                        player1.RandomArr();
+                    }
+                    Printer.ClearingConsole();
+                    Printer.History(player1.history);
+                }
+                else
+                {
+                    Location n = new Location(value, player1.field);
+                    Location zero = new Location(0, player1.field);
+                    if (player1.Shift(value, n, zero))
+                    {
+                        player1.ChangeKnuckles(value, n, zero);
+                        player1.History(value);
+                    }
+                    Printer.ClearingConsole();
+                    Printer.History(player1.history);
+                }
+            }
+            Printer.Win();
+            Printer.InfoAboutTurns(player1.history);
+            Printer.AskNewGame();
+            if (Printer.ReadUserAnswer().ToLower() == "yes")
+            {
+                ChooseTypeGame();
+            }
+            else
+            {
+                Printer.End();
+            }
+        }
+        public static void PlayGame2(Game2 player1)
+        {
+            Printer.ClearingConsole();
+            Printer.InfoAboutRandom();
+            while (!player1.CheckWinSequence())
+            {
+                int value;
+                Printer.Field(player1.field);
+                Printer.AskNumber();
+                string answer = Console.ReadLine();
+                bool number = Int32.TryParse(answer, out value);
+                if (!number)
+                {
+                    if (answer == "random")
+                    {
+                        player1.RandomArr();
+                    }
+                    Printer.ClearingConsole();
+                }
+                else
+                {
+                    Location n = new Location(value, player1.field);
+                    Location zero = new Location(0, player1.field);
+                    if (player1.Shift(value, n, zero))
+                    {
+                        player1.ChangeKnuckles(value, n, zero);
+                    }
+                    Printer.ClearingConsole();
+                }
+            }
+            Printer.AskNewGame();
+            if (Printer.ReadUserAnswer().ToLower() == "yes")
+            {
+                ChooseTypeGame();
+            }
+            else
+            {
+                Printer.End();
+            }
+        }
+        public static void PlayGame1(Game player1)
+        {
+            int value;
+            Printer.ClearingConsole();
+            Printer.Field(player1.field);
+            Printer.AskNumber();
+            string answer = Console.ReadLine();
+            bool number = Int32.TryParse(answer, out value);
+            if (!number)
+            {
+                Printer.ClearingConsole();
+            }
+            else
+            {
                 Location n = new Location(value, player1.field);
                 Location zero = new Location(0, player1.field);
                 if (player1.Shift(value, n, zero))
                 {
                     player1.ChangeKnuckles(value, n, zero);
-                    player1.History(value);
                 }
-                Print.ClearingConsole();
-                Print.PrintHistory(player1.history);
-            }
-            Print.Win(player1.history.Count);
-            Print.AskNewGame();
-            if (Print.ReadUserAnswer().ToLower() == "yes")
-            {
-                Print.AskSize();
-                int size = Convert.ToInt32(Console.ReadLine());
-                player1 = new Game3(size);
-                PlayGame(player1);
-            }
-            else
-            {
-                Print.End();
+                PlayGame1(player1);
             }
         }
         public static int[] CreateArr() // здесь должно быть считывание массива
@@ -75,33 +156,69 @@ namespace Лаба_2_пятнашки__Reboot
             }
             return numbers;
         }
-        public static void ChooseInputParameter()
+        public static void ChooseInputParameterForGame3()
         {
-            Print.AskInputParameters();
+            Printer.ClearingConsole();
+            Printer.AskInputParameters();
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice == 1) // size
             {
-                Print.AskSize();
+                Printer.AskSize();
                 int size = Convert.ToInt32(Console.ReadLine());
                 Game3 player1 = new Game3(size);
-                PlayGame(player1);
+                PlayGame3(player1);
             }
             else if (choice == 2) // arr
             {
                 int[] numbers = CreateArr();
                 Game3 player1 = new Game3(numbers);
-                if (player1.CheckNumbers(numbers))
-                {
-                    PlayGame(player1);
-                }
-                else
-                {
-                    throw new Exception("Wrong measure");
-                }
+                PlayGame3(player1);
             }
             else
             {
-                ChooseInputParameter();
+                ChooseInputParameterForGame3();
+            }
+        }
+        public static void ChooseInputParameterForGame2()
+        {
+            Printer.ClearingConsole();
+            Printer.AskInputParameters();
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (choice == 1) // size
+            {
+                Printer.AskSize();
+                int size = Convert.ToInt32(Console.ReadLine());
+                Game2 player1 = new Game2(size);
+                PlayGame2(player1);
+            }
+            else if (choice == 2) // arr
+            {
+                int[] numbers = CreateArr();
+                Game2 player1 = new Game2(numbers);
+                PlayGame2(player1);
+            }
+            else
+            {
+                ChooseInputParameterForGame3();
+            }
+        }
+        public static void ChooseTypeGame()
+        {
+            Printer.AskTypeGame();
+            int number = Convert.ToInt32(Console.ReadLine());
+            if (number == 1)
+            {
+                int[] numbers = CreateArr();
+                Game player1 = new Game(numbers);
+                PlayGame1(player1);
+            }
+            else if (number == 2)
+            {
+                ChooseInputParameterForGame2();
+            }
+            else
+            {
+                ChooseInputParameterForGame3();
             }
         }
     }

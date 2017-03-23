@@ -16,30 +16,12 @@ namespace Лаба_2_пятнашки__Reboot
         public Game2(int size)
             : base(size)
         {
+            this.field = new int[size, size];
+            RandomArr();
+        }
+        public void RandomArr()
+        {
             Random Gen = new Random();
-            RandomArr(size, Gen);
-        }
-        public void RandomArr(int[] numbers, Random Gen)
-        {
-            for (int i = 0; i < field.GetLength(0); i++)
-            {
-                for (int j = 0; j < field.GetLength(1); j++)
-                {
-                    int index = Gen.Next(0, field.Length);
-                    for (int k = 0; k < numbers.Length; k++)
-                    {
-                        while (numbers[index] == numbers[k] && numbers[k] == -1)
-                        {
-                            index = Gen.Next(0, field.Length);
-                        }
-                    }
-                    field[i, j] = numbers[index];
-                    numbers[index] = -1;
-                }
-            }
-        }
-        public void RandomArr(int size, Random Gen)
-        {
             int[] numbers = new int[field.Length];
             for (int i = 0; i < numbers.GetLength(0); i++)
             {

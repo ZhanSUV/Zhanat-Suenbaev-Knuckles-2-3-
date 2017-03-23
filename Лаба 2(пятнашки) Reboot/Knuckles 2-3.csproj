@@ -46,7 +46,7 @@
     <Compile Include="Game2.cs" />
     <Compile Include="Game3.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Print.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

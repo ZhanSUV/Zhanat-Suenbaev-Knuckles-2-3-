@@ -8,13 +8,13 @@ namespace Лаба_2_пятнашки__Reboot
 {
     class Game
     {
-        public readonly int[,] field;
+        public int[,] field;
         public Game(int[] numbers)
         {
             this.field = new int[(int)Math.Sqrt(numbers.Length), (int)Math.Sqrt(numbers.Length)];
             FillingFromArr(numbers);
         }
-        public Game(int size)
+        protected Game(int size)
         {
             this.field = new int[size, size];
         }
@@ -35,58 +35,67 @@ namespace Лаба_2_пятнашки__Reboot
                         count++;
                     }
                 }
-            }          
+            }
+            CheckNumbers();      
         }
-        public bool CheckNumbers(int[] numbers)
+        private bool CheckNumbers()
         {
             int size = (int)Math.Sqrt(field.Length);
-            return CheckSquareField(numbers, size) && CheckCorrectSequence(numbers) && CheckPositiveNumbers(numbers) && CheckUniqueNumbers(numbers);
+            return CheckSquareField() && CheckCorrectSequence() && CheckPositiveNumbers() && CheckUniqueNumbers();
         }
-        public bool CheckPositiveNumbers(int[] numbers)
+        private bool CheckPositiveNumbers()
         {
-            bool check = true;
-            for (int i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < field.GetLength(0); i++)
             {
-                if (numbers[i] < 0)
+                for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    check = false;
-                    break;
-                }
-            }
-            return check;
-        }
-        public bool CheckUniqueNumbers(int[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                for (int j = 0; j < numbers.Length; j++)
-                {
-                    if (i != j)
+                    if (field[i,j] < 0)
                     {
-                        if (numbers[i] == numbers[j])
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
             return true;
         }
-        public bool CheckCorrectSequence(int[] numbers)
+        private bool CheckUniqueNumbers()
         {
-            int count = 0;
-            for (int i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < field.GetLength(0); i++)
             {
-                for (int j = 0; j < numbers.Length; j++)
+                for (int i1 = 0; i1 < field.GetLength(0); i1++)
                 {
-                    if (count == numbers[j])
+                    if (i1 == i)
+                    {
+                        for (int j = 0; j < field.GetLength(1); j++)
+                        {
+                            for (int j1 = 0; j1 < field.GetLength(1); j1++)
+                            {
+                                if (j1 == j)
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+            return true;
+        }
+        private bool CheckCorrectSequence()
+        {
+            int[] correctSequence = new int[field.Length];
+            int count = 0;
+            for (int i = 0; i < correctSequence.Length; i++)
+            {
+                for (int j = 0; j < correctSequence.Length; j++)
+                {
+                    if (count == correctSequence[j])
                     {
                         count++;
                         break;
                     }
                 }
             }
-            if (count == numbers.Length)
+            if (count == field.Length)
             {
                 return true;
             }
@@ -95,9 +104,10 @@ namespace Лаба_2_пятнашки__Reboot
                 return false;
             }
         }
-        public bool CheckSquareField(int[] numbers, int size)
+        private bool CheckSquareField()
         {
-            if (Math.Pow(size, 2) == numbers.Length)
+            double size = Math.Sqrt(field.Length);
+            if (size == ((double)((int)size)))
             {
                 return true;
             }
