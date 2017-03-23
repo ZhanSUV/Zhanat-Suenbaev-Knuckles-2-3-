@@ -8,7 +8,7 @@ namespace Лаба_2_пятнашки__Reboot
 {
     class Game
     {
-        public int[,] field;
+        public readonly int[,] field;
         public Game(int[] numbers)
         {
             this.field = new int[(int)Math.Sqrt(numbers.Length), (int)Math.Sqrt(numbers.Length)];
@@ -122,10 +122,14 @@ namespace Лаба_2_пятнашки__Reboot
             }
             return false;
         }
-        public void ChangeKnuckles(int value, Location n, Location zero)
+        public virtual void ChangeKnuckles(int value, Location n, Location zero)
         {
             field[zero.y,zero.x] = field[n.y,n.x];
             field[n.y,n.x] = 0;
+        }
+        public int this[int i, int j]
+        {
+            get { return field[i, j]; }
         }
     }
 }

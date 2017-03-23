@@ -14,14 +14,19 @@ namespace Лаба_2_пятнашки__Reboot
         }
         public static void PlayGame3(Game3 player1)
         {
-            Printer.ClearingConsole();
-            Printer.InfoAboutRandom();
-            Printer.InfoAboutRollback();
+            player1.field[1, 1] = 12;
+            Console.Clear();
+            //Printer.ClearingConsole();
+            Console.WriteLine("You can random your arr. If you want to random arr, add 'random'");
+            //Printer.InfoAboutRandom();
+            Console.WriteLine("You can rollback your turn. Just add 'r' to rollback");
+            //Printer.InfoAboutRollback();
             while (!player1.CheckWinSequence())
             {
                 int value;
-                Printer.Field(player1.field);
-                Printer.AskNumber();
+                Printer.Field(player1);
+                //Printer.AskNumber();
+                Console.Write("Type your number to move to zero ");
                 string answer = Console.ReadLine();
                 bool number = Int32.TryParse(answer, out value);
                 if (!number)
@@ -34,7 +39,8 @@ namespace Лаба_2_пятнашки__Reboot
                     {
                         player1.RandomArr();
                     }
-                    Printer.ClearingConsole();
+                    //Printer.ClearingConsole();
+                    Console.Clear();
                     Printer.History(player1.history);
                 }
                 else
@@ -44,33 +50,41 @@ namespace Лаба_2_пятнашки__Reboot
                     if (player1.Shift(value, n, zero))
                     {
                         player1.ChangeKnuckles(value, n, zero);
-                        player1.History(value);
                     }
-                    Printer.ClearingConsole();
+                    Console.Clear();
+                    //Printer.ClearingConsole();
                     Printer.History(player1.history);
                 }
             }
-            Printer.Win();
+            //Printer.Win();
+            Console.WriteLine("YOU WIN!!!");
             Printer.InfoAboutTurns(player1.history);
-            Printer.AskNewGame();
-            if (Printer.ReadUserAnswer().ToLower() == "yes")
+            //Printer.AskNewGame();
+            Console.Write("Do you want to play a new game: YES/NO ");
+            if (Console.ReadLine().ToLower() == "yes")
             {
                 ChooseTypeGame();
             }
             else
             {
-                Printer.End();
+                //Printer.End();
+                Console.WriteLine("Good bye");
+                Console.WriteLine("Add enter to exit from the game");
+                Console.ReadLine();
             }
         }
         public static void PlayGame2(Game2 player1)
         {
-            Printer.ClearingConsole();
-            Printer.InfoAboutRandom();
+            Console.Clear();
+            //Printer.ClearingConsole();
+            Console.WriteLine("You can random your arr. If you want to random arr, add 'random'");
+            //Printer.InfoAboutRandom();
             while (!player1.CheckWinSequence())
             {
                 int value;
-                Printer.Field(player1.field);
-                Printer.AskNumber();
+                Printer.Field(player1);
+                //Printer.AskNumber();
+                Console.Write("Type your number to move to zero ");
                 string answer = Console.ReadLine();
                 bool number = Int32.TryParse(answer, out value);
                 if (!number)
@@ -79,7 +93,8 @@ namespace Лаба_2_пятнашки__Reboot
                     {
                         player1.RandomArr();
                     }
-                    Printer.ClearingConsole();
+                    //Printer.ClearingConsole();
+                    Console.Clear();
                 }
                 else
                 {
@@ -89,30 +104,38 @@ namespace Лаба_2_пятнашки__Reboot
                     {
                         player1.ChangeKnuckles(value, n, zero);
                     }
-                    Printer.ClearingConsole();
+                    //Printer.ClearingConsole();
+                    Console.Clear();
                 }
             }
-            Printer.AskNewGame();
-            if (Printer.ReadUserAnswer().ToLower() == "yes")
+            //Printer.AskNewGame();
+            Console.Write("Do you want to play a new game: YES/NO ");
+            if (Console.ReadLine().ToLower() == "yes")
             {
                 ChooseTypeGame();
             }
             else
             {
-                Printer.End();
+                //Printer.End();
+                Console.WriteLine("Good bye");
+                Console.WriteLine("Add enter to exit from the game");
+                Console.ReadLine();
             }
         }
         public static void PlayGame1(Game player1)
         {
             int value;
-            Printer.ClearingConsole();
-            Printer.Field(player1.field);
-            Printer.AskNumber();
+            //Printer.ClearingConsole();
+            Console.Clear();
+            Printer.Field(player1);
+            //Printer.AskNumber();
+            Console.Write("Type your number to move to zero ");
             string answer = Console.ReadLine();
             bool number = Int32.TryParse(answer, out value);
             if (!number)
             {
-                Printer.ClearingConsole();
+                //Printer.ClearingConsole();
+                Console.Clear();
             }
             else
             {
@@ -158,12 +181,16 @@ namespace Лаба_2_пятнашки__Reboot
         }
         public static void ChooseInputParameterForGame3()
         {
-            Printer.ClearingConsole();
-            Printer.AskInputParameters();
+            Console.Clear();
+            //Printer.ClearingConsole();
+            //Printer.AskInputParameters();
+            Console.WriteLine("What do you input: size(1) or arr(2)?");
+            Console.Write("Choose a number = ");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice == 1) // size
             {
-                Printer.AskSize();
+                Console.Write("Type a size of your field ");
+                //Printer.AskSize();
                 int size = Convert.ToInt32(Console.ReadLine());
                 Game3 player1 = new Game3(size);
                 PlayGame3(player1);
@@ -181,12 +208,16 @@ namespace Лаба_2_пятнашки__Reboot
         }
         public static void ChooseInputParameterForGame2()
         {
-            Printer.ClearingConsole();
-            Printer.AskInputParameters();
+            //Printer.ClearingConsole();
+            Console.Clear();
+            //Printer.AskInputParameters();
+            Console.WriteLine("What do you input: size(1) or arr(2)?");
+            Console.Write("Choose a number = ");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice == 1) // size
             {
-                Printer.AskSize();
+                Console.Write("Type a size of your field ");
+                //Printer.AskSize();
                 int size = Convert.ToInt32(Console.ReadLine());
                 Game2 player1 = new Game2(size);
                 PlayGame2(player1);
@@ -204,7 +235,9 @@ namespace Лаба_2_пятнашки__Reboot
         }
         public static void ChooseTypeGame()
         {
-            Printer.AskTypeGame();
+            //Printer.AskTypeGame();
+            Console.WriteLine("What Game do you choose: \n1)Game1 without winning? \n2)Game2 - normal with winning? \n3)Game3 with history of your turns and rollbacks?");
+            Console.Write("Choose a number of Game = ");
             int number = Convert.ToInt32(Console.ReadLine());
             if (number == 1)
             {

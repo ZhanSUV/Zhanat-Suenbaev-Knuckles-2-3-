@@ -16,10 +16,13 @@ namespace Лаба_2_пятнашки__Reboot
         public Game2(int size)
             : base(size)
         {
-            this.field = new int[size, size];
             RandomArr();
         }
-        public void RandomArr()
+        public override void ChangeKnuckles(int value, Location n, Location zero)
+        {
+            base.ChangeKnuckles(value, n, zero);
+        }
+        public virtual void RandomArr()
         {
             Random Gen = new Random();
             int[] numbers = new int[field.Length];

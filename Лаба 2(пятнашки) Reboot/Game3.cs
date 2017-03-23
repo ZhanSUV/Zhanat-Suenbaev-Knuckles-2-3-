@@ -19,9 +19,18 @@ namespace Лаба_2_пятнашки__Reboot
         {
             this.history = new List<int>();
         }
-        public void History(int value)
+        public override void ChangeKnuckles(int value, Location n, Location zero)
         {
+            base.ChangeKnuckles(value, n, zero);
             history.Add(value);
+        }
+        public override void RandomArr()
+        {
+            base.RandomArr();
+            if (!(history == null))
+            {
+                history.Clear();
+            }
         }
         public void Rollback()
         {
@@ -31,7 +40,7 @@ namespace Лаба_2_пятнашки__Reboot
                 history.Remove(lastValue);
                 Location n = new Location(lastValue, field);
                 Location zero = new Location(0, field);
-                ChangeKnuckles(lastValue, n, zero);
+                base.ChangeKnuckles(lastValue, n, zero);
             }
         }
     }
